@@ -1,4 +1,5 @@
 import { IProduct, getProductById } from "@/database/productDatabase";
+import { MaterialIcons } from "@expo/vector-icons";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import {
@@ -6,6 +7,7 @@ import {
   Platform,
   SafeAreaView,
   ScrollView,
+  Share,
   StatusBar,
   StyleSheet,
   Text,
@@ -24,6 +26,18 @@ export default function ProductDetail() {
     }
   }, [id]);
 
+  const handleShare = async () => {
+    if (product) {
+      try {
+        await Share.share({
+          message: `${product.name} - ${product.shortDescription}\n\n${product.price}`,
+        });
+      } catch (error) {
+        console.error("Share error:", error);
+      }
+    }
+  };
+
   if (!product) {
     return (
       <View style={styles.centered}>
@@ -40,10 +54,11 @@ export default function ProductDetail() {
             style={styles.backButton}
             onPress={() => router.back()}
           >
-            <Text style={styles.backButtonText}>{"<"}</Text>
+            <MaterialIcons name="arrow-back-ios-new" size={18} color="#fff" />
           </TouchableOpacity>
           <Text style={styles.headerTitle}>Detail Produk</Text>
         </View>
+
         <Image
           source={{ uri: product.image }}
           style={styles.image}
@@ -53,6 +68,10 @@ export default function ProductDetail() {
         <Text style={styles.price}>{product.price}</Text>
         <Text style={styles.short}>{product.shortDescription}</Text>
         <Text style={styles.long}>{product.longDescription}</Text>
+
+        <TouchableOpacity style={styles.shareButton} onPress={handleShare}>
+          <Text style={styles.shareButtonText}>Bagikan Produk</Text>
+        </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   );
@@ -66,7 +85,7 @@ const styles = StyleSheet.create({
   },
   container: {
     padding: 16,
-    paddingBottom: 20,
+    paddingBottom: 32,
   },
   header: {
     flexDirection: "row",
@@ -78,15 +97,12 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   backButton: {
-    padding: 8,
+    padding: 10,
     borderRadius: 20,
+    alignItems: "center",
+    justifyContent: "center",
     backgroundColor: "#1565c0",
     marginRight: 16,
-  },
-  backButtonText: {
-    color: "#fff",
-    fontSize: 20,
-    fontWeight: "bold",
   },
   headerTitle: {
     color: "#fff",
@@ -123,6 +139,18 @@ const styles = StyleSheet.create({
     color: "#555",
     lineHeight: 22,
     marginBottom: 20,
+  },
+  shareButton: {
+    backgroundColor: "#1976d2",
+    paddingVertical: 12,
+    borderRadius: 10,
+    alignItems: "center",
+    marginTop: 10,
+  },
+  shareButtonText: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "bold",
   },
   centered: {
     flex: 1,

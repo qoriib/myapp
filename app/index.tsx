@@ -60,8 +60,15 @@ export default function ProductListScreen() {
 
   return (
     <SafeAreaView style={styles.safeArea}>
+      <View style={styles.header}>
+        <Image
+          source={require("@/assets/images/logo.png")}
+          style={styles.logo}
+          resizeMode="contain"
+        />
+        <Text style={styles.headerTitle}>YourCare+</Text>
+      </View>
       <View style={styles.container}>
-        <Text style={styles.title}>Produk Kesehatan</Text>
         <TextInput
           placeholder="Cari produk..."
           value={searchText}
@@ -84,16 +91,29 @@ const styles = StyleSheet.create({
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
     backgroundColor: "#e3f2fd",
   },
+  header: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    backgroundColor: "#bbdefb",
+    borderBottomColor: "#90caf9",
+    borderBottomWidth: 1,
+  },
+  logo: {
+    width: 36,
+    height: 36,
+    marginRight: 10,
+  },
+  headerTitle: {
+    fontSize: 22,
+    fontWeight: "bold",
+    color: "#0d47a1",
+  },
   container: {
     flex: 1,
     padding: 16,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: "#0d47a1",
-    marginBottom: 16,
-    textAlign: "center",
   },
   searchInput: {
     backgroundColor: "#ffffff",
