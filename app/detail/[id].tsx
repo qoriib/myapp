@@ -16,7 +16,7 @@ import {
 export default function ProductDetail() {
   const { id } = useLocalSearchParams();
   const [product, setProduct] = useState<IProduct | null>(null);
-  const router = useRouter(); // Inisialisasi router untuk navigasi
+  const router = useRouter();
 
   useEffect(() => {
     if (id) {
@@ -35,34 +35,23 @@ export default function ProductDetail() {
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView contentContainerStyle={styles.container}>
-        {/* Header dengan Tombol Back */}
         <View style={styles.header}>
           <TouchableOpacity
             style={styles.backButton}
             onPress={() => router.back()}
           >
-            {" "}
-            {/* Tombol Kembali */}
             <Text style={styles.backButtonText}>{"<"}</Text>
           </TouchableOpacity>
           <Text style={styles.headerTitle}>Detail Produk</Text>
         </View>
-
-        {/* Gambar Produk */}
         <Image
           source={{ uri: product.image }}
           style={styles.image}
           resizeMode="cover"
         />
-
-        {/* Nama dan Harga Produk */}
         <Text style={styles.name}>{product.name}</Text>
         <Text style={styles.price}>{product.price}</Text>
-
-        {/* Deskripsi Pendek */}
         <Text style={styles.short}>{product.shortDescription}</Text>
-
-        {/* Deskripsi Panjang */}
         <Text style={styles.long}>{product.longDescription}</Text>
       </ScrollView>
     </SafeAreaView>
@@ -83,8 +72,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     backgroundColor: "#1976d2",
-    paddingVertical: 20,
-    paddingHorizontal: 16,
+    paddingVertical: 16,
+    paddingHorizontal: 20,
     borderRadius: 10,
     marginBottom: 16,
   },
@@ -108,10 +97,8 @@ const styles = StyleSheet.create({
   image: {
     width: "100%",
     height: 320,
-    borderRadius: 16,
+    borderRadius: 10,
     marginBottom: 16,
-    borderColor: "#1976d2",
-    borderWidth: 1,
   },
   name: {
     fontSize: 24,
@@ -126,11 +113,13 @@ const styles = StyleSheet.create({
   },
   short: {
     fontSize: 16,
+    textAlign: "justify",
     color: "#333",
     marginBottom: 12,
   },
   long: {
     fontSize: 16,
+    textAlign: "justify",
     color: "#555",
     lineHeight: 22,
     marginBottom: 20,
