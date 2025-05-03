@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "ProductApp",
-    "slug": "ProductApp",
+    "slug": "productapp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -38,6 +38,13 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "421ccb01-f1e6-46b9-93cb-9d1acfdab574"
+      }
+    },
+    "owner": "qoriib"
   }
 }
